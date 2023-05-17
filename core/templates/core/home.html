@@ -12,45 +12,42 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            
+
             {% if user.is_authenticated %}
-                <a class="navbar-brand" href="#">NightOwl</a>
-                <form class="form-inline">
-                    <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-light" type="submit">Search</button>
-                </form>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link " href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Settings</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Logout</a>
-                    </li>
-                </ul>
+            <a class="navbar-brand" href="#">NightOwl</a>
+            <form class="form-inline">
+                <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link " href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Settings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Logout</a>
+                </li>
+            </ul>
             {% else %}
-                <a class="navbar-brand" href="#">NightOwl</a>
-                
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    
-                        <a class="nav-link" href="#">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
-                    </li>
-                </ul>
+            <a class="navbar-brand" href="#">NightOwl</a>
+
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+
+                <a class="nav-link" href="#">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Login</a>
+                </li>
+            </ul>
             {% endif %}
-
-
-            
         </div>
     </nav>
 
@@ -58,24 +55,32 @@
     <main role="main" class="container">
         <div class="row py-5">
             <div class="col-lg-8">
- 
+
                 <div class="content">
-                    <article class="media content-section">
-                        <img class="rounded-circle article-img" src="">
-                          <div class="media-body">
+                    {% for post in posts %}
+
+                    <article class="rounded media post-section content-section">
+                        <!--  -->
+                        
+                        <div class="media-body">
                             <div class="article-metadata">
-                              <a class="link-unstyled mr-2 font-weight-bold" href="">Mustafa</a>
-                              <small class="text-muted">23 Dec 2020</small>
+                                <img class="rounded-circle article-img" src="">
+                                <a class="link-unstyled mr-2 font-weight-bold" href="">@{{ post.author }}</a>
+                                <small class="time-tooltip text-muted" title="{{ post.time_since_posted.1 }}">
+                                    {{ post.time_since_posted.0 }} ago
+                                </small>
                             </div>
-                            <p class="article-content">this is post content</p>
-                          </div>
-                      </article>
+                            <p class="article-content">{{ post.content }}</p>
+                        </div>
+                    </article>
+                    {% endfor %}
+                    
                 </div>
 
             </div>
             <div class="col-lg-4">
                 <div class="content">
-                    
+
                     <ul class="list-group">
                         <li class="list-group-item list-group-item-light">
                             <a href="#" class="link-unstyled">Latest Posts</a>
@@ -86,7 +91,7 @@
                         <li class="list-group-item list-group-item-light">
                             <a href="#" class="link-unstyled">Calendars</a>
                         </li>
-                        
+
                     </ul>
                 </div>
             </div>
