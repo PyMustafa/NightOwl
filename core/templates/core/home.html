@@ -55,18 +55,14 @@
     <main role="main" class="container">
         <div class="row py-5">
             <div class="col-lg-8">
-
                 <div class="content">
                     {% for post in posts %}
-
                     <article class="rounded media post-section content-section">
-                        <!--  -->
-                        
                         <div class="media-body">
                             <div class="article-metadata">
-                                <img class="rounded-circle article-img" src="">
-                                <a class="link-unstyled mr-2 font-weight-bold" href="">@{{ post.author }}</a>
-                                <small class="time-tooltip text-muted" title="{{ post.time_since_posted.1 }}">
+                                <img class="rounded-circle article-img profile-pic" src="{{ post.author.profile.image.url }}">
+                                <a class="link-unstyled font-weight-bold mr-2 ml-2 mt-4 " href="">@{{ post.author }}</a>
+                                <small class="time-tooltip text-muted mt-4" title="{{ post.time_since_posted.1 }}">
                                     {{ post.time_since_posted.0 }} ago
                                 </small>
                             </div>
@@ -74,13 +70,10 @@
                         </div>
                     </article>
                     {% endfor %}
-                    
                 </div>
-
             </div>
             <div class="col-lg-4">
                 <div class="content">
-
                     <ul class="list-group">
                         <li class="list-group-item list-group-item-light">
                             <a href="#" class="link-unstyled">Latest Posts</a>
@@ -91,11 +84,12 @@
                         <li class="list-group-item list-group-item-light">
                             <a href="#" class="link-unstyled">Calendars</a>
                         </li>
-
                     </ul>
                 </div>
             </div>
         </div>
+        
+        
     </main>
 
 
