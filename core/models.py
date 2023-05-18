@@ -27,6 +27,7 @@ class Post(models.Model):
 
 
 class Profile(models.Model):
+    #oneToOne relationship, means that for any user, there is just one profile
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=100, blank=True)
     location = models.TextField(max_length=100, blank=True)
@@ -42,5 +43,4 @@ class Profile(models.Model):
     '''
     def __str__(self):
         return f'{self.user.username} profile'
-    
     

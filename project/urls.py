@@ -24,5 +24,9 @@ urlpatterns = [
     path('', include('core.urls'))
 ]
 
+
+#this is to serve media files during development when DEBUG mode is enabled.
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
