@@ -17,3 +17,14 @@ class PostListView(ListView):
     template_name = 'core/home.html'
     context_object_name = 'posts'
     
+
+
+#these three methods just for testing
+def register(request):
+    return render(request, 'core/register.html')
+
+def login(request):
+    return render(request, 'core/login.html')
+
+def loged_out(request):
+    return render(request, 'core/logged_out.html')
