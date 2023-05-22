@@ -1,6 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Post
-from django.views.generic import ListView
+from django.contrib.auth.models import User
+from django.views.generic import ListView, CreateView, View
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+
 # Create your views here.
 
 
@@ -23,8 +27,48 @@ class PostListView(ListView):
 def register(request):
     return render(request, 'core/register.html')
 
-def login(request):
-    return render(request, 'core/login.html')
+class RegisterView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'core/register.html')
+    
+    def post(self, request, *args, **kwargs):
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        if User.objects.filter(username=username).exists():
+            messages.error(request, f"The username '{username}' is already taken. Please try a different username.")
+            return redirect('register')
+        if User.objects.filter(email=email).exists():
+            messages.error(request, f'This email is already registered. Please use a different email.')
+            return redirect('register')
 
-def loged_out(request):
-    return render(request, 'core/logged_out.html')
+        
+        user = User.objects.create_user(username=username, email=email, password=password)
+        user.save()
+        messages.success(request, f'Your account has been created! You can login now')
+        return redirect('login')
+        
+
+class LoginView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'core/login.html')
+    
+    def post(self, request, *args, **kwargs):
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, f'Logged in successfully.')
+            return redirect('home') 
+        
+        messages.error(request, f'Invalid username or password. Please try again.')
+        return redirect('login')  
+
+
+
+class LogoutView(View):
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return redirect('logged-out')
