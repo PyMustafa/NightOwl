@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Post
 from django.contrib.auth.models import User
 from django.views.generic import ListView, CreateView, View
@@ -20,12 +20,27 @@ class PostListView(ListView):
     model = Post
     template_name = 'core/home.html'
     context_object_name = 'posts'
+
+
+    
+class ProfilePostListView(ListView):
+    model = Post
+    template_name = 'core/profile.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Post.objects.filter(author=user).order_by('-time_posted')
+
+
+
+
     
 
 
 #these three methods just for testing
-def register(request):
-    return render(request, 'core/register.html')
+def profile(request):
+    return render(request, 'core/profile.html')
 
 class RegisterView(View):
     def get(self, request, *args, **kwargs):
@@ -68,7 +83,7 @@ class LoginView(View):
 
 
 
-class LogoutView(View):
-    def get(self, request, *args, **kwargs):
-        logout(request)
-        return redirect('logged-out')
+# class LogoutView(View):
+#     def get(self, request, *args, **kwargs):
+#         logout(request)
+#         return redirect('logged-out')

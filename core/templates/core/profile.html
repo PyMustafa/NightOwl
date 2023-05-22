@@ -1,0 +1,94 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>NightOwl - Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'core/profilestyle.css' %}">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">NightOwl</a>
+            <form class="form-inline">
+                <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'profile' user.username %}">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Settings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logged-out' %}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <main role="main" class="container">
+        <div class="row py-5">
+            <div class="col-lg-3">
+                <div class="content">
+                    <div class="profile-info">
+                        <img class="rounded-circle profile-pic" src="{{ user.profile.image.url }}">
+                        <h2 class="profile-username">@{{ user.username }}</h2>
+                        <p class="profile-bio">{{ user.profile.bio }}</p>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-light">
+                            <a href="#" class="link-unstyled">Posts</a>
+                        </li>
+                        <li class="list-group-item list-group-item-light">
+                            <a href="#" class="link-unstyled">Friends</a>
+                        </li>
+                        <li class="list-group-item list-group-item-light">
+                            <a href="#" class="link-unstyled">Photos</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="content">
+                    <h3 class="section-title">Posts</h3>
+                    <div class="posts">
+                        {% for post in posts %}
+                        <article class="rounded media post-section content-section">
+                            <div class="media-body">
+                                <div class="article-metadata">
+                                    <img class="rounded-circle article-img profile-pic" src="{{ post.author.profile.image.url }}">
+                                    <a class="link-unstyled font-weight-bold mr-2 ml-2 mt-2 " href="">@{{ post.author }}</a>
+                                    <small class="time-tooltip text-muted mt-2" title="{{ post.time_since_posted.1 }}">
+                                        {{ post.time_since_posted.0 }} ago
+                                    </small>
+                                </div>
+                                <p class="article-content ml-3 mr-3">{{ post.content }}</p>
+                            </div>
+                        </article>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="py-2">
+        <div class="container text-center">
+            <p>&copy; 2023 NightOwl. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

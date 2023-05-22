@@ -1,0 +1,154 @@
+/* Common Styles (from homestyle.css) */
+body {
+    background-color: #36393F;
+    color: #FFF;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .navbar {
+    background-color: #202225;
+  }
+  
+  .navbar-brand {
+    font-size: 24px;
+  }
+  
+  .form-inline .form-control {
+    width: 300px;
+    background-color: #2C2F33;
+    border-color: #2C2F33;
+    color: #FFF;
+  }
+  
+  .form-inline .form-control::placeholder {
+    color: #8E9297;
+  }
+
+  .form-inline {
+  display: flex;
+  align-items: center;
+}
+  
+  .form-inline .btn {
+    background-color: #7289DA;
+    border-color: #7289DA;
+    color: #FFF;
+    display: flex;
+    align-items: center;
+  }
+  
+  .content {
+    background-color: #2C2F33;
+    border-radius: 5px;
+    padding: 20px;
+    flex-grow: 1;
+  }
+  
+  footer {
+    background-color: #202225;
+    color: #a2a2a2;
+    padding: 10px;
+    margin-top: auto;
+  }
+  
+  .list-group {
+    background-color: #202225;
+  }
+  
+  .list-group-item {
+    background-color: #202225;
+  }
+  
+  .link-unstyled {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+  }
+  
+  .link-unstyled:hover {
+    color: #a0a0a0; 
+  }
+  
+  .post-section {
+    color: #a0a0a0;
+    background-color: #202225; 
+    margin-bottom: 20px; 
+    padding: 10px;
+  }
+  
+  .article-metadata {
+    color: #ececec;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .time-tooltip {
+    position: relative;
+    cursor: default;
+  }
+  
+  .time-tooltip::after {
+    content: attr(title);
+    position: static;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 3px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+  }
+  
+  .time-tooltip:hover::after {
+    opacity: 1;
+  }
+  
+  .profile-info {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .profile-pic {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  .profile-username {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .profile-bio {
+    font-size: 14px;
+    color: #a0a0a0;
+  }
+
+  
+.profile-pic {
+  width: 50px;
+  height: 50px;
+}
+
+
+  
+  .section-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .posts {
+    margin-top: 20px;
+  }
+  
